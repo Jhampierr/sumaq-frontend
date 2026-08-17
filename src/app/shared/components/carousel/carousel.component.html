@@ -3,6 +3,6 @@
   [attr.autoplay]="autoplay" [attr.navigation]="navigation" [attr.pagination]="pagination"
   [attr.centered-slides]="isSingleSlide ? null : centeredSlides"
   [attr.breakpoints]="isSingleSlide ? null : breakpointsAttr"
-  [ngClass]="isSingleSlide ? 'w-full select-none h-full' : 'w-full py-6 select-none'">
+  [ngClass]="isSingleSlide ? 'w-full h-full' : 'w-full py-6'">
   <ng-content></ng-content>
 </swiper-container>
