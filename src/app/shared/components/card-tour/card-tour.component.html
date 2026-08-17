@@ -1,0 +1,44 @@
+<div class="group flex flex-col h-full bg-white bg-opacity-70 backdrop-blur-md border border-logo-sand border-opacity-40 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+  
+  <!-- Image Container with Zoom effect and badges -->
+  <div class="relative overflow-hidden aspect-[4/3] w-full">
+    <img [src]="tour.image" [alt]="tour.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+    
+    <!-- Duration Badge -->
+    <span class="absolute top-4 left-4 px-3 py-1 text-xs font-black bg-white bg-opacity-95 text-logo-gold shadow-sm rounded-full tracking-wide">
+      {{ tour.duration }}
+    </span>
+
+    <!-- Location Badge -->
+    <span class="absolute bottom-4 left-4 px-3 py-1 text-xs font-bold bg-logo-dark bg-opacity-80 text-white rounded-full flex items-center space-x-1">
+      <svg class="w-3.5 h-3.5 text-logo-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <span>{{ tour.location }}</span>
+    </span>
+  </div>
+
+  <!-- Content Container -->
+  <div class="p-6 flex flex-col flex-grow select-none">
+    <!-- Tour Name -->
+    <h3 class="text-lg sm:text-xl font-black text-logo-dark leading-snug group-hover:text-logo-orange transition-colors duration-300 mb-2">
+      {{ tour.name }}
+    </h3>
+    
+    <!-- Description -->
+    <p class="text-sm text-logo-dark text-opacity-70 line-clamp-3 mb-4">
+      {{ tour.description }}
+    </p>
+
+    <!-- Footer Pricing & CTA -->
+    <div class="mt-auto pt-4 border-t border-logo-sand border-opacity-30 flex items-center justify-between">
+      <div class="flex flex-col">
+        <span class="text-[10px] font-bold text-logo-dark text-opacity-50 uppercase tracking-widest leading-none">Precio desde</span>
+        <span class="text-lg sm:text-xl font-extrabold text-logo-gold leading-none mt-1">S/ {{ tour.price }}</span>
+      </div>
+      
+      <!-- Action link -->
+      <a [routerLink]="['/tour', tour.id]" class="px-4 py-2 text-sm font-bold rounded-full bg-logo-sand text-logo-gold hover:bg-logo-orange hover:text-white transition-all duration-300">
+        Ver Tour
+      </a>
+    </div>
+  </div>
+</div>

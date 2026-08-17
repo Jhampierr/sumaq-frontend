@@ -1,0 +1,59 @@
+<div class="text-left space-y-6 select-none animate-fade-in">
+  <div class="space-y-2">
+    <h3 class="text-xl sm:text-2xl font-black text-logo-dark">Pregunta 1 de 15: Duración del viaje</h3>
+    <p class="text-sm text-logo-dark text-opacity-60 font-semibold">¿De cuántos días dispones para viajar en esta ocasión?</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+    <!-- Option 1 Day -->
+    <div (click)="selectDays(1)" 
+         [ngClass]="value === 1 ? 'border-logo-orange bg-logo-orange bg-opacity-10 shadow-md text-logo-orange' : 'border-logo-sand bg-white text-logo-dark hover:border-logo-yellow hover:bg-logo-cream'"
+         class="border-2 rounded-2xl p-4 cursor-pointer text-center flex flex-col items-center justify-center space-y-2 transition-all duration-300">
+      <span class="text-2xl">🎒</span>
+      <span class="text-sm font-black leading-none">1 Día</span>
+      <span class="text-[10px] text-logo-dark text-opacity-50 group-hover:text-logo-orange font-bold">Full Day</span>
+    </div>
+
+    <!-- Option 2 Days -->
+    <div (click)="selectDays(2)" 
+         [ngClass]="value === 2 ? 'border-logo-orange bg-logo-orange bg-opacity-10 shadow-md text-logo-orange' : 'border-logo-sand bg-white text-logo-dark hover:border-logo-yellow hover:bg-logo-cream'"
+         class="border-2 rounded-2xl p-4 cursor-pointer text-center flex flex-col items-center justify-center space-y-2 transition-all duration-300">
+      <span class="text-2xl">⛺</span>
+      <span class="text-sm font-black leading-none">2 Días</span>
+      <span class="text-[10px] text-logo-dark text-opacity-50 font-bold">Fin de semana</span>
+    </div>
+
+    <!-- Option 3 Days -->
+    <div (click)="selectDays(3)" 
+         [ngClass]="value === 3 ? 'border-logo-orange bg-logo-orange bg-opacity-10 shadow-md text-logo-orange' : 'border-logo-sand bg-white text-logo-dark hover:border-logo-yellow hover:bg-logo-cream'"
+         class="border-2 rounded-2xl p-4 cursor-pointer text-center flex flex-col items-center justify-center space-y-2 transition-all duration-300">
+      <span class="text-2xl">✈️</span>
+      <span class="text-sm font-black leading-none">3 Días</span>
+      <span class="text-[10px] text-logo-dark text-opacity-50 font-bold">Corto</span>
+    </div>
+
+    <!-- Option 4 Days -->
+    <div (click)="selectDays(4)" 
+         [ngClass]="value === 4 ? 'border-logo-orange bg-logo-orange bg-opacity-10 shadow-md text-logo-orange' : 'border-logo-sand bg-white text-logo-dark hover:border-logo-yellow hover:bg-logo-cream'"
+         class="border-2 rounded-2xl p-4 cursor-pointer text-center flex flex-col items-center justify-center space-y-2 transition-all duration-300">
+      <span class="text-2xl">🗺️</span>
+      <span class="text-sm font-black leading-none">4 Días</span>
+      <span class="text-[10px] text-logo-dark text-opacity-50 font-bold">Medio</span>
+    </div>
+
+    <!-- Option 5 Days -->
+    <div (click)="selectDays(5)" 
+         [ngClass]="value === 5 ? 'border-logo-orange bg-logo-orange bg-opacity-10 shadow-md text-logo-orange' : 'border-logo-sand bg-white text-logo-dark hover:border-logo-yellow hover:bg-logo-cream'"
+         class="border-2 rounded-2xl p-4 cursor-pointer text-center flex flex-col items-center justify-center space-y-2 transition-all duration-300">
+      <span class="text-2xl">🏔️</span>
+      <span class="text-sm font-black leading-none">5+ Días</span>
+      <span class="text-[10px] text-logo-dark text-opacity-50 font-bold">Largo / Completo</span>
+    </div>
+  </div>
+
+  <div class="flex justify-end pt-4">
+    <button (click)="onNext()" class="px-6 py-2.5 rounded-full bg-logo-orange text-white font-bold hover:bg-logo-gold shadow-md hover:shadow-lg transition-all duration-300">
+      Siguiente &rarr;
+    </button>
+  </div>
+</div>

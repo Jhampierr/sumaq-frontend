@@ -1,0 +1,8 @@
+<!-- Carrusel único: los atributos varían según sea 1 sola tarjeta (hero) o multitarjeta responsivo -->
+<swiper-container [attr.slides-per-view]="slidesPerView" [attr.space-between]="spaceBetween" [attr.loop]="loop"
+  [attr.autoplay]="autoplay" [attr.navigation]="navigation" [attr.pagination]="pagination"
+  [attr.centered-slides]="isSingleSlide ? null : centeredSlides"
+  [attr.breakpoints]="isSingleSlide ? null : breakpointsAttr"
+  [ngClass]="isSingleSlide ? 'w-full select-none h-full' : 'w-full py-6 select-none'">
+  <ng-content></ng-content>
+</swiper-container>

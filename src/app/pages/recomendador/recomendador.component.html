@@ -1,0 +1,246 @@
+<div class="py-12 bg-logo-cream min-h-screen">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Title -->
+    <div class="text-center mb-8 select-none" *ngIf="currentStep <= 15">
+      <span class="text-xs font-black tracking-widest text-logo-orange uppercase bg-logo-sand px-3 py-1 rounded-full">PLANIFICADOR INTELIGENTE</span>
+      <h1 class="text-3xl sm:text-4xl font-black text-logo-dark mt-3">Recomendador de Viaje</h1>
+      <p class="text-xs sm:text-sm text-logo-dark text-opacity-70 mt-2 max-w-lg mx-auto font-semibold">
+        Responde las siguientes 15 preguntas rápidas para sugerirte el destino de Sumaq Perú perfecto para tus gustos y presupuesto.
+      </p>
+    </div>
+
+    <!-- Progress Bar (Only during questions) -->
+    <div class="w-full bg-logo-sand h-3 rounded-full mb-8 overflow-hidden shadow-inner" *ngIf="currentStep <= 15">
+      <div class="bg-gradient-to-r from-logo-yellow to-logo-orange h-full rounded-full transition-all duration-500" 
+           [style.width.%]="(currentStep / 15) * 100">
+      </div>
+      <div class="flex justify-between text-[10px] font-bold text-logo-dark text-opacity-50 mt-1.5 px-1 select-none">
+        <span>Inicio</span>
+        <span>Progreso: {{ currentStep * 6 }}%</span>
+        <span>Fin</span>
+      </div>
+    </div>
+
+    <!-- Card Wrapper -->
+    <div class="bg-white bg-opacity-75 backdrop-blur-md border border-logo-sand border-opacity-40 rounded-3xl p-6 sm:p-10 shadow-lg relative min-h-[350px] flex flex-col justify-between">
+      
+      <!-- Loader state -->
+      <div *ngIf="isAnalyzing" class="absolute inset-0 bg-white bg-opacity-95 rounded-3xl z-30 flex flex-col items-center justify-center p-8 select-none animate-fade-in">
+        <div class="w-16 h-16 border-4 border-logo-sand border-t-logo-orange rounded-full animate-spin"></div>
+        <h3 class="text-xl font-black text-logo-dark mt-6">Analizando tu perfil de viajero...</h3>
+        <p class="text-xs text-logo-dark text-opacity-65 mt-2 max-w-sm text-center font-semibold">
+          Nuestro modelo está evaluando la duración, presupuesto y preferencias para encontrar el destino de coincidencia perfecta.
+        </p>
+      </div>
+
+      <!-- STEP 1: Duración -->
+      <app-step-duracion *ngIf="currentStep === 1" 
+                          [(value)]="datosRequest.duracion" 
+                          (next)="nextStep()">
+      </app-step-duracion>
+
+      <!-- STEP 2: Presupuesto -->
+      <app-step-presupuesto *ngIf="currentStep === 2" 
+                             [(value)]="datosRequest.presupuesto" 
+                             (next)="nextStep()" 
+                             (prev)="prevStep()">
+      </app-step-presupuesto>
+
+      <!-- STEP 3: Tipo de Viajero -->
+      <div *ngIf="currentStep === 3" class="text-left space-y-6 select-none animate-fade-in">
+        <div class="space-y-2">
+          <h3 class="text-xl sm:text-2xl font-black text-logo-dark">Pregunta 3 de 15: Compañía de Viaje</h3>
+          <p class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Con quién o quiénes tienes planeado viajar?</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label *ngFor="let opt of [['solitario', 'Solo / Aventura personal 🎒'], ['pareja', 'En Pareja / Escapada romántica 💑'], ['familia', 'En Familia / Relax y diversión 👨‍👩‍👧‍👦'], ['amigos', 'Con Amigos / Diversión grupal 👥'], ['promocion', 'Viaje escolar / Promoción de colegio 🏫']]" 
+                 class="flex items-center p-4 border rounded-2xl cursor-pointer hover:bg-logo-cream transition duration-300"
+                 [ngClass]="datosRequest.tipoViajero === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+            <input type="radio" name="tipoViajero" [(ngModel)]="datosRequest.tipoViajero" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+            <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+          </label>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button (click)="prevStep()" class="px-6 py-2.5 rounded-full bg-logo-sand text-logo-gold font-bold hover:bg-logo-yellow hover:text-logo-dark transition">Atrás</button>
+          <button (click)="nextStep()" class="px-6 py-2.5 rounded-full bg-logo-orange text-white font-bold hover:bg-logo-gold shadow transition">Siguiente &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Región Preferida -->
+      <div *ngIf="currentStep === 4" class="text-left space-y-6 select-none animate-fade-in">
+        <div class="space-y-2">
+          <h3 class="text-xl sm:text-2xl font-black text-logo-dark">Pregunta 4 de 15: Región / Clima</h3>
+          <p class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Qué tipo de región geográfica prefieres visitar?</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <label *ngFor="let opt of [['costa', 'Costa y Playa / Desiertos soleados 🏖️'], ['sierra', 'Sierra y Montañas / Valles andinos 🏔️'], ['selva', 'Selva tropical / Ríos y cataratas 🌴']]" 
+                 class="flex flex-col items-center justify-center p-6 border-2 rounded-2xl cursor-pointer hover:bg-logo-cream transition text-center"
+                 [ngClass]="datosRequest.regionPreferida === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+            <input type="radio" name="regionPreferida" [(ngModel)]="datosRequest.regionPreferida" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand mb-3" />
+            <span class="text-sm font-black text-logo-dark">{{ opt[1] }}</span>
+          </label>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button (click)="prevStep()" class="px-6 py-2.5 rounded-full bg-logo-sand text-logo-gold font-bold hover:bg-logo-yellow hover:text-logo-dark transition">Atrás</button>
+          <button (click)="nextStep()" class="px-6 py-2.5 rounded-full bg-logo-orange text-white font-bold hover:bg-logo-gold shadow transition">Siguiente &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Intereses -->
+      <div *ngIf="currentStep === 5" class="text-left space-y-6 select-none animate-fade-in">
+        <div class="space-y-2">
+          <h3 class="text-xl sm:text-2xl font-black text-logo-dark">Pregunta 5 de 15: Tipo de Interés</h3>
+          <p class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Cuáles son tus mayores intereses al viajar? (Selecciona todos los que gustes)</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label *ngFor="let opt of [['naturaleza', 'Naturaleza y Fauna silvestre 🦙'], ['aventura', 'Aventura y Deportes extremos 🧗'], ['relajo', 'Bienestar, relajo y baños termales 🛀'], ['historia', 'Historia, arqueología y cultura 🏛️']]" 
+                 class="flex items-center p-4 border rounded-2xl cursor-pointer hover:bg-logo-cream transition"
+                 [ngClass]="datosRequest.intereses.includes(opt[0]) ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+            <input type="checkbox" [checked]="datosRequest.intereses.includes(opt[0])" (change)="onInterestToggle(opt[0], $event)" class="h-4 w-4 text-logo-orange rounded focus:ring-logo-orange border-logo-sand" />
+            <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+          </label>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button (click)="prevStep()" class="px-6 py-2.5 rounded-full bg-logo-sand text-logo-gold font-bold hover:bg-logo-yellow hover:text-logo-dark transition">Atrás</button>
+          <button (click)="nextStep()" class="px-6 py-2.5 rounded-full bg-logo-orange text-white font-bold hover:bg-logo-gold shadow transition">Siguiente &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEPS 6 a 15: Generic styled question inputs for other parameters -->
+      <div *ngIf="currentStep >= 6 && currentStep <= 15" class="text-left space-y-6 select-none animate-fade-in">
+        
+        <!-- Questions titles mapping -->
+        <div class="space-y-2">
+          <h3 class="text-xl sm:text-2xl font-black text-logo-dark">Pregunta {{ currentStep }} de 15</h3>
+          
+          <p *ngIf="currentStep === 6" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Qué ritmo de viaje prefieres?</p>
+          <p *ngIf="currentStep === 7" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Qué nivel de alojamiento prefieres?</p>
+          <p *ngIf="currentStep === 8" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Qué medio de transporte local prefieres?</p>
+          <p *ngIf="currentStep === 9" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Qué tipo de clima te agrada más?</p>
+          <p *ngIf="currentStep === 10" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿En qué temporada de clima planeas viajar?</p>
+          <p *ngIf="currentStep === 11" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Qué tipo de gastronomía o comida prefieres?</p>
+          <p *ngIf="currentStep === 12" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Prefieres contar con seguro de viaje integral grupal incluido?</p>
+          <p *ngIf="currentStep === 13" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿En qué idioma prefieres el guiado de los tours?</p>
+          <p *ngIf="currentStep === 14" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Con qué tipo de equipaje vas a viajar?</p>
+          <p *ngIf="currentStep === 15" class="text-sm text-logo-dark text-opacity-60 font-semibold">¿Es tu primera vez visitando destinos turísticos peruanos?</p>
+        </div>
+
+        <!-- Options grids based on Step -->
+        <div class="space-y-3">
+          <!-- Step 6: Ritmo -->
+          <div *ngIf="currentStep === 6" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['suave', 'Suave / Paseos tranquilos y contemplativos 🚶'], ['moderado', 'Moderado / Caminatas clásicas y tiempo libre 🧭'], ['intenso', 'Intenso / Trekking exigente y adrenalina 🧗']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.ritmoViaje === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="ritmo" [(ngModel)]="datosRequest.ritmoViaje" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 7: Alojamiento -->
+          <div *ngIf="currentStep === 7" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['basico', 'Hospedaje Básico / Solo para dormir 🛌'], ['estandar', 'Hotel Clásico 3 estrellas / Cómodo y céntrico 🏨'], ['premium', 'Resort o Superior / Con piscina y desayuno buffet 🏊']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.alojamiento === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="alojamiento" [(ngModel)]="datosRequest.alojamiento" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 8: Transporte -->
+          <div *ngIf="currentStep === 8" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['terrestre', 'Terrestre / Minivan turística o bus 🚌'], ['aereo', 'Aéreo / Vuelos rápidos interprovinciales ✈️'], ['indistinto', 'Indistinto / Lo que sea más práctico 🗺️']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.transporte === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="transporte" [(ngModel)]="datosRequest.transporte" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 9: Clima -->
+          <div *ngIf="currentStep === 9" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['calido', 'Caluroso y soleado ☀️'], ['frio', 'Frío y fresco de altura ❄️'], ['templado', 'Templado y campestre 🍃']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.clima === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="clima" [(ngModel)]="datosRequest.clima" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 10: Temporada -->
+          <div *ngIf="currentStep === 10" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label *ngFor="let opt of [['seca', 'Temporada seca (Mayo a Octubre - Sol andino) ☀️'], ['lluvias', 'Temporada húmeda/verde (Noviembre a Abril - Paisajes intensos) 🌧️']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.temporada === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="temporada" [(ngModel)]="datosRequest.temporada" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 11: Alimentación -->
+          <div *ngIf="currentStep === 11" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['tipica', 'Comida típica local (Pachamanca, trucha, tacacho) 🍲'], ['marina', 'Cebiche y comida marina fresca 🐟'], ['indiferente', 'Sin preferencia / Todo tipo de comida 🍽️']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.alimentacion === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="alimentacion" [(ngModel)]="datosRequest.alimentacion" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 12: Seguro -->
+          <div *ngIf="currentStep === 12" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.seguro === true ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="seguro" [ngModel]="datosRequest.seguro" (ngModelChange)="datosRequest.seguro = true" [value]="true" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">Sí, considero indispensable contar con asistencia médica 🏥</span>
+            </label>
+            <label class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.seguro === false ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="seguro" [ngModel]="datosRequest.seguro" (ngModelChange)="datosRequest.seguro = false" [value]="false" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">No, prefiero ahorrar ese costo y usar mi seguro personal 💳</span>
+            </label>
+          </div>
+
+          <!-- Step 13: Idioma -->
+          <div *ngIf="currentStep === 13" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['espanol', 'Solo Español 🇪🇸'], ['ingles', 'Solo Inglés 🇬🇧'], ['ambos', 'Bilingüe (Español e Inglés) 🌍']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.idioma === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="idioma" [(ngModel)]="datosRequest.idioma" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 14: Equipaje -->
+          <div *ngIf="currentStep === 14" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <label *ngFor="let opt of [['ligero', 'Ligero / Solo mochila de mano 🎒'], ['mediano', 'Mediano / Maleta de cabina 🧳'], ['pesado', 'Completo / Equipaje de bodega grande 📦']]" 
+                   class="flex items-center p-4 border rounded-2xl cursor-pointer" [ngClass]="datosRequest.equipaje === opt[0] ? 'border-logo-orange bg-logo-orange bg-opacity-5' : 'border-logo-sand bg-white'">
+              <input type="radio" name="equipaje" [(ngModel)]="datosRequest.equipaje" [value]="opt[0]" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">{{ opt[1] }}</span>
+            </label>
+          </div>
+
+          <!-- Step 15: Primera vez -->
+          <div *ngIf="currentStep === 15" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="flex items-center p-4 border rounded-2xl cursor-pointer border-logo-sand bg-white">
+              <input type="radio" name="primeraVez" value="si" checked class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">Sí, es mi primera vez conociendo estos destinos 🤩</span>
+            </label>
+            <label class="flex items-center p-4 border rounded-2xl cursor-pointer border-logo-sand bg-white">
+              <input type="radio" name="primeraVez" value="no" class="h-4 w-4 text-logo-orange focus:ring-logo-orange border-logo-sand" />
+              <span class="ml-3 text-sm font-bold text-logo-dark">No, ya he visitado anteriormente el Perú y quiero repetir 🦙</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Wizard buttons -->
+        <div class="flex justify-between pt-4">
+          <button (click)="prevStep()" class="px-6 py-2.5 rounded-full bg-logo-sand text-logo-gold font-bold hover:bg-logo-yellow hover:text-logo-dark transition">Atrás</button>
+          <button (click)="nextStep()" class="px-6 py-2.5 rounded-full bg-logo-orange text-white font-bold hover:bg-logo-gold shadow transition">
+            {{ currentStep === 15 ? 'Obtener Recomendación ✨' : 'Siguiente \u2192' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 16: Resultado -->
+      <app-resultado-recomendacion *ngIf="currentStep === 16 && recommendationResult" 
+                                    [result]="recommendationResult" 
+                                    [resetForm]="resetForm">
+      </app-resultado-recomendacion>
+
+    </div>
+
+  </div>
+</div>

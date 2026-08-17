@@ -1,0 +1,131 @@
+<div class="bg-logo-cream min-h-screen pb-16" *ngIf="tour; else notFound">
+  
+  <!-- Hero Banner -->
+  <div class="relative w-full h-[50vh] bg-logo-dark overflow-hidden select-none">
+    <div class="absolute inset-0 bg-cover bg-center filter brightness-50" [style.background-image]="'url(' + tour.image + ')'"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-logo-cream via-transparent to-transparent"></div>
+    <div class="absolute bottom-6 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left text-white">
+      <span class="inline-block px-3 py-1 bg-logo-orange text-white text-xs font-black rounded-full uppercase tracking-wider mb-2">
+        {{ tour.duration }} &bull; {{ tour.departures }}
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-none text-logo-yellow drop-shadow-md">
+        {{ tour.name }}
+      </h1>
+      <p class="text-sm sm:text-base text-logo-sand text-opacity-90 font-semibold mt-2 drop-shadow">
+        📍 Ubicación: {{ tour.location }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      
+      <!-- Left side: Information -->
+      <div class="lg:col-span-8 space-y-8 text-left">
+        
+        <!-- Description -->
+        <div class="bg-white bg-opacity-70 border border-logo-sand border-opacity-35 p-6 sm:p-8 rounded-3xl select-none shadow-sm">
+          <h2 class="text-xl sm:text-2xl font-black text-logo-dark mb-4">Detalle del Destino</h2>
+          <p class="text-sm sm:text-base text-logo-dark text-opacity-80 leading-relaxed font-semibold">
+            {{ tour.longDescription || tour.description }}
+          </p>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="bg-white bg-opacity-70 border border-logo-sand border-opacity-35 p-6 sm:p-8 rounded-3xl select-none shadow-sm" *ngIf="tour.itinerary && tour.itinerary.length > 0">
+          <h2 class="text-xl sm:text-2xl font-black text-logo-dark mb-6">Itinerario Programado</h2>
+          <div class="relative border-l-2 border-logo-orange border-opacity-40 pl-6 ml-4 space-y-6">
+            <div *ngFor="let item of tour.itinerary" class="relative">
+              <!-- Bullet dot -->
+              <span class="absolute -left-[31px] top-1.5 w-4 h-4 bg-logo-orange border-2 border-white rounded-full"></span>
+              <p class="text-sm text-logo-dark text-opacity-90 font-bold leading-relaxed">{{ item }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inclusions & Exclusions -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- Included -->
+          <div class="bg-white bg-opacity-70 border border-logo-sand border-opacity-35 p-6 sm:p-8 rounded-3xl select-none shadow-sm" *ngIf="tour.included && tour.included.length > 0">
+            <h3 class="text-lg font-black text-logo-dark mb-4 flex items-center space-x-2">
+              <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-black">&check;</span>
+              <span>Servicios Incluidos</span>
+            </h3>
+            <ul class="space-y-2 text-xs sm:text-sm text-logo-dark text-opacity-80 font-bold">
+              <li *ngFor="let inc of tour.included" class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>{{ inc }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Not Included -->
+          <div class="bg-white bg-opacity-70 border border-logo-sand border-opacity-35 p-6 sm:p-8 rounded-3xl select-none shadow-sm" *ngIf="tour.notIncluded && tour.notIncluded.length > 0">
+            <h3 class="text-lg font-black text-logo-dark mb-4 flex items-center space-x-2">
+              <span class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-black">&times;</span>
+              <span>No Incluye</span>
+            </h3>
+            <ul class="space-y-2 text-xs sm:text-sm text-logo-dark text-opacity-80 font-bold">
+              <li *ngFor="let noInc of tour.notIncluded" class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                <span>{{ noInc }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right side: Sticky Booking Card -->
+      <div class="lg:col-span-4 lg:sticky lg:top-24 space-y-6">
+        <div class="bg-white border-2 border-logo-orange border-opacity-40 rounded-3xl p-6 shadow-lg text-left select-none">
+          <span class="text-xs font-bold text-logo-dark text-opacity-50 uppercase tracking-widest leading-none">Inversión por Persona</span>
+          <div class="flex items-baseline space-x-2 mt-1 mb-4">
+            <span class="text-3xl font-black text-logo-gold">S/ {{ tour.price }}</span>
+            <span class="text-xs font-bold text-logo-dark text-opacity-40">/ base</span>
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm text-logo-dark text-opacity-80 font-bold mb-6">
+            <div class="flex justify-between py-2 border-b border-logo-sand border-opacity-40">
+              <span>Duración:</span>
+              <span class="text-logo-orange">{{ tour.duration }}</span>
+            </div>
+            <div class="flex justify-between py-2 border-b border-logo-sand border-opacity-40">
+              <span>Salidas:</span>
+              <span class="text-logo-orange">{{ tour.departures }}</span>
+            </div>
+            <div class="flex justify-between py-2">
+              <span>Disponibilidad:</span>
+              <span class="text-green-600">Cupos Disponibles</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="space-y-3">
+            <a [href]="'https://wa.me/51987654321?text=Hola,%20quisiera%20reservar%20el%20tour%20' + tour.name" 
+               target="_blank" 
+               class="w-full text-center inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-full bg-green-500 hover:bg-green-600 text-white font-bold transition-all shadow-md">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.588 2.015 14.117 1.01 11.48 1.01c-5.44 0-9.866 4.372-9.87 9.802 0 1.714.47 3.388 1.365 4.85l-.393 1.434 1.485-.39 1.59.954zm10.203-7.602c-.328-.164-1.94-.957-2.24-1.066-.3-.11-.518-.164-.736.164-.218.328-.846 1.066-1.037 1.284-.19.218-.38.246-.708.082-.328-.164-1.386-.51-2.64-1.627-.977-.872-1.637-1.95-1.828-2.278-.19-.328-.02-.505.143-.668.148-.147.328-.382.492-.573.164-.19.219-.328.328-.546.11-.219.055-.41-.027-.573-.082-.164-.736-1.776-1.01-2.433-.267-.643-.56-.553-.767-.563-.198-.01-.424-.012-.653-.012-.23 0-.601.087-.915.442-.314.355-1.202 1.175-1.202 2.868s1.235 3.33 1.408 3.56c.173.23 2.43 3.712 5.887 5.202 2.886 1.246 3.466 1.077 4.697.96.932-.088 2.24-.915 2.555-1.799.314-.883.314-1.64.22-1.799-.095-.16-.356-.27-.685-.434z"/></svg>
+              <span>Reservar por WhatsApp</span>
+            </a>
+            <app-button-cta text="Consultar Disponibilidad" link="/contacto" styleType="secondary" class="w-full"></app-button-cta>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Tour not found screen -->
+<ng-template #notFound>
+  <div class="py-24 text-center select-none bg-logo-cream min-h-screen flex flex-col items-center justify-center">
+    <svg class="w-16 h-16 text-logo-orange text-opacity-50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+    <h2 class="text-xl font-black text-logo-dark">Tour no encontrado</h2>
+    <p class="text-sm text-logo-dark text-opacity-65 mt-2">El destino que buscas no existe o ha sido descontinuado.</p>
+    <div class="mt-6">
+      <app-button-cta text="Volver al Inicio" link="/inicio" styleType="primary"></app-button-cta>
+    </div>
+  </div>
+</ng-template>

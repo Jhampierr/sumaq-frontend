@@ -1,0 +1,21 @@
+<section class="py-16 bg-logo-sand bg-opacity-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <!-- Section Title -->
+    <app-section-title 
+      title="Testimonios de nuestros viajeros" 
+      subtitle="Experiencias Reales"
+      align="center">
+    </app-section-title>
+
+    <!-- Carousel Container -->
+    <div class="mt-8" data-aos="fade-up">
+      <app-carousel [slidesPerView]="3" [autoplay]="true" [loop]="true" [navigation]="true" [pagination]="true">
+        <swiper-slide *ngFor="let item of testimonios" class="h-full py-4">
+          <app-card-testimonio [testimonio]="item"></app-card-testimonio>
+        </swiper-slide>
+      </app-carousel>
+    </div>
+
+  </div>
+</section>

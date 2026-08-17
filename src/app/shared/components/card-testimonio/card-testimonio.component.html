@@ -1,0 +1,41 @@
+<div class="group flex flex-col h-full bg-white bg-opacity-70 backdrop-blur-md border border-logo-sand border-opacity-40 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+  
+  <!-- related image header -->
+  <div class="relative overflow-hidden aspect-[16/9] w-full">
+    <img [src]="testimonio.image" [alt]="testimonio.destination" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+    <span class="absolute top-3 right-3 px-2.5 py-1 text-xs font-black bg-logo-orange text-white rounded-full tracking-wide">
+      {{ testimonio.destination }}
+    </span>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6 pt-4 flex flex-col flex-grow select-none">
+    
+    <!-- Client Info Header -->
+    <div class="flex items-center space-x-3 mb-3">
+      <img *ngIf="testimonio.clientAvatar" [src]="testimonio.clientAvatar" [alt]="testimonio.clientName" class="w-10 h-10 rounded-full object-cover border-2 border-logo-orange border-opacity-50" />
+      <div class="flex flex-col text-left">
+        <h4 class="text-sm font-black text-logo-dark leading-none">{{ testimonio.clientName }}</h4>
+        <span class="text-[10px] text-logo-dark text-opacity-50 font-bold mt-1">{{ testimonio.date }}</span>
+      </div>
+    </div>
+
+    <!-- Rating Stars -->
+    <div class="mb-3">
+      <app-star-rating [rating]="testimonio.rating"></app-star-rating>
+    </div>
+
+    <!-- Comment -->
+    <p class="text-sm text-logo-dark text-opacity-80 italic leading-relaxed mb-6 flex-grow">
+      "{{ testimonio.comment }}"
+    </p>
+
+    <!-- Redirect CTA Button -->
+    <div class="pt-4 border-t border-logo-sand border-opacity-30">
+      <a routerLink="/full-days" class="w-full text-center block px-4 py-2 text-sm font-bold rounded-full bg-logo-sand text-logo-gold hover:bg-logo-gold hover:text-white transition-all duration-300">
+        Ver tours
+      </a>
+    </div>
+
+  </div>
+</div>

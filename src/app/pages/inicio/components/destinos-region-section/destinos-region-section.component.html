@@ -1,0 +1,69 @@
+<section class="py-16 bg-logo-sand bg-opacity-35" *ngIf="spotlightTour">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <app-section-title 
+      title="Disfruta de este tour cualquier día de la semana" 
+      subtitle="Salidas Diarias Garantizadas"
+      align="center">
+    </app-section-title>
+
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      
+      <!-- Left side: Medium Image -->
+      <div class="lg:col-span-5" data-aos="fade-right">
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] max-w-lg mx-auto">
+          <img [src]="spotlightTour.image" [alt]="spotlightTour.name" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-logo-dark/40 to-transparent"></div>
+          
+          <!-- Daily Departure Badge -->
+          <span class="absolute top-4 left-4 px-4 py-1.5 text-xs font-black bg-logo-orange text-white shadow rounded-full tracking-wider uppercase">
+            {{ spotlightTour.departures }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Right side: Tour Information -->
+      <div class="lg:col-span-7 text-left space-y-6" data-aos="fade-left">
+        <div>
+          <span class="text-sm font-bold text-logo-orange tracking-widest uppercase leading-none">Tour Recomendado</span>
+          <h3 class="text-3xl sm:text-4xl font-black text-logo-dark tracking-tight leading-none mt-2">
+            {{ spotlightTour.location }}
+          </h3>
+        </div>
+
+        <p class="text-base sm:text-lg text-logo-dark text-opacity-80 leading-relaxed font-medium">
+          {{ spotlightTour.longDescription || spotlightTour.description }}
+        </p>
+
+        <!-- Highlights Checklist -->
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-logo-dark text-opacity-90 font-semibold" *ngIf="spotlightTour.highlights">
+          <li *ngFor="let highlight of spotlightTour.highlights" class="flex items-center space-x-2">
+            <svg class="w-5 h-5 text-logo-orange shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span>{{ highlight }}</span>
+          </li>
+        </ul>
+
+        <!-- Pricing details & Action Button -->
+        <div class="pt-6 border-t border-logo-sand border-opacity-50 flex flex-wrap items-center justify-between gap-6">
+          <div class="flex flex-col">
+            <span class="text-xs font-bold text-logo-dark text-opacity-50 uppercase tracking-widest leading-none">Precio Especial</span>
+            <div class="flex items-baseline space-x-2 mt-1">
+              <span class="text-3xl font-black text-logo-gold">S/ {{ spotlightTour.price }}</span>
+              <span class="text-xs font-bold text-logo-dark text-opacity-40">/ por persona</span>
+            </div>
+          </div>
+          
+          <app-button-cta 
+            text="Más información" 
+            link="/salidas-diarias" 
+            styleType="primary" 
+            size="lg">
+          </app-button-cta>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

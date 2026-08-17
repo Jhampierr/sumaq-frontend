@@ -1,0 +1,92 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-90 backdrop-blur-md shadow-md border-b border-logo-sand border-opacity-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-20 flex items-center justify-between">
+    
+    <!-- Logo Left Side -->
+    <a routerLink="/" (click)="closeMobileMenu()" class="flex items-center space-x-2 group">
+      <!-- Custom SVG Logo reflecting the sunset-hiker concept -->
+      <div class="w-12 h-12 relative flex items-center justify-center bg-logo-cream rounded-full border border-logo-sand shadow-inner overflow-hidden">
+        <svg viewBox="0 0 100 100" class="w-10 h-10">
+          <!-- Sunset Circle (Yellow to Orange gradient) -->
+          <defs>
+            <linearGradient id="sunsetGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FFD54F" />
+              <stop offset="50%" stop-color="#FF9800" />
+              <stop offset="100%" stop-color="#E65100" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="45" r="35" fill="url(#sunsetGrad)" />
+          
+          <!-- Flying Birds -->
+          <path d="M 30,30 Q 33,28 36,31 Q 39,28 42,30" fill="none" stroke="#1E150F" stroke-width="1.5" stroke-linecap="round" />
+          <path d="M 45,35 Q 47,33 49,35 Q 51,33 53,34" fill="none" stroke="#1E150F" stroke-width="1" stroke-linecap="round" />
+
+          <!-- Pine Trees (Silhouette) -->
+          <path d="M 22,70 L 25,55 L 23,55 L 26,45 L 24,45 L 27,37 L 30,45 L 28,45 L 31,55 L 29,55 L 32,70 Z" fill="#1E150F" />
+          <path d="M 12,70 L 15,58 L 13,58 L 16,48 L 14,48 L 17,40 L 20,48 L 18,48 L 21,58 L 19,58 L 22,70 Z" fill="#1E150F" />
+
+          <!-- Ground / Rock -->
+          <path d="M 10,70 Q 30,68 50,65 Q 75,55 90,62 L 90,85 L 10,85 Z" fill="#1E150F" />
+          
+          <!-- Hiker Silhouette -->
+          <!-- Head -->
+          <circle cx="65" cy="40" r="3" fill="#1E150F" />
+          <!-- Body / Backpack -->
+          <path d="M 64,43 L 68,43 L 69,52 L 63,52 Z" fill="#1E150F" /> <!-- Backpack -->
+          <path d="M 62,43 Q 65,43 65,55 L 61,65 L 60,65 L 63,55 Z" fill="#1E150F" /> <!-- Torso -->
+          <!-- Legs (Walking position) -->
+          <path d="M 63,55 L 58,68 L 54,67" stroke="#1E150F" stroke-width="3" stroke-linecap="round" />
+          <path d="M 63,55 L 67,65 L 72,70" stroke="#1E150F" stroke-width="3" stroke-linecap="round" />
+          <!-- Walking Poles -->
+          <line x1="60" y1="45" x2="52" y2="70" stroke="#1E150F" stroke-width="1" />
+          <line x1="65" y1="45" x2="74" y2="70" stroke="#1E150F" stroke-width="1" />
+        </svg>
+      </div>
+      <!-- Logo Typography -->
+      <div class="flex flex-col select-none">
+        <span class="text-lg lg:text-xl font-black tracking-wider text-logo-gold leading-none group-hover:text-logo-orange transition-colors duration-300">SUMAQ PERÚ</span>
+        <span class="text-xs font-semibold tracking-widest text-logo-dark leading-none">T O U R S</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Links Right Side -->
+    <nav class="hidden md:flex space-x-1 lg:space-x-2">
+      <a routerLink="/inicio" routerLinkActive="text-logo-orange border-logo-orange bg-logo-sand bg-opacity-40" class="px-3 py-2 rounded-md text-sm font-bold text-logo-dark border-b-2 border-transparent hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-20 transition-all duration-300" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      <a routerLink="/full-days" routerLinkActive="text-logo-orange border-logo-orange bg-logo-sand bg-opacity-40" class="px-3 py-2 rounded-md text-sm font-bold text-logo-dark border-b-2 border-transparent hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-20 transition-all duration-300">Full Days</a>
+      <a routerLink="/salidas-diarias" routerLinkActive="text-logo-orange border-logo-orange bg-logo-sand bg-opacity-40" class="px-3 py-2 rounded-md text-sm font-bold text-logo-dark border-b-2 border-transparent hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-20 transition-all duration-300">Salidas diarias</a>
+      <a routerLink="/paquetes" routerLinkActive="text-logo-orange border-logo-orange bg-logo-sand bg-opacity-40" class="px-3 py-2 rounded-md text-sm font-bold text-logo-dark border-b-2 border-transparent hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-20 transition-all duration-300">Paquetes</a>
+      <a routerLink="/nosotros" routerLinkActive="text-logo-orange border-logo-orange bg-logo-sand bg-opacity-40" class="px-3 py-2 rounded-md text-sm font-bold text-logo-dark border-b-2 border-transparent hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-20 transition-all duration-300">Nosotros</a>
+      <a routerLink="/contacto" routerLinkActive="text-logo-orange border-logo-orange bg-logo-sand bg-opacity-40" class="px-3 py-2 rounded-md text-sm font-bold text-logo-dark border-b-2 border-transparent hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-20 transition-all duration-300">Contacto</a>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden flex items-center">
+      <button (click)="toggleMobileMenu()" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-logo-dark hover:text-logo-orange hover:bg-logo-sand hover:bg-opacity-50 focus:outline-none transition duration-300" aria-controls="mobile-menu" [aria-expanded]="isMobileMenuOpen">
+        <span class="sr-only">Abrir menú</span>
+        <!-- Animated Hamburger Icon -->
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path *ngIf="!isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+          <path *ngIf="isMobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer / Overlay -->
+  <div *ngIf="isMobileMenuOpen" class="md:hidden animate-fade-in" id="mobile-menu">
+    <div class="px-2 pt-2 pb-4 space-y-1 bg-white shadow-xl border-t border-logo-sand border-opacity-30 flex flex-col">
+      <a routerLink="/inicio" routerLinkActive="bg-logo-orange text-white" class="block px-4 py-3 rounded-md text-base font-bold text-logo-dark hover:bg-logo-sand hover:text-logo-orange transition duration-200" (click)="closeMobileMenu()" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      <a routerLink="/full-days" routerLinkActive="bg-logo-orange text-white" class="block px-4 py-3 rounded-md text-base font-bold text-logo-dark hover:bg-logo-sand hover:text-logo-orange transition duration-200" (click)="closeMobileMenu()">Full Days</a>
+      <a routerLink="/salidas-diarias" routerLinkActive="bg-logo-orange text-white" class="block px-4 py-3 rounded-md text-base font-bold text-logo-dark hover:bg-logo-sand hover:text-logo-orange transition duration-200" (click)="closeMobileMenu()">Salidas diarias</a>
+      <a routerLink="/paquetes" routerLinkActive="bg-logo-orange text-white" class="block px-4 py-3 rounded-md text-base font-bold text-logo-dark hover:bg-logo-sand hover:text-logo-orange transition duration-200" (click)="closeMobileMenu()">Paquetes</a>
+      <a routerLink="/nosotros" routerLinkActive="bg-logo-orange text-white" class="block px-4 py-3 rounded-md text-base font-bold text-logo-dark hover:bg-logo-sand hover:text-logo-orange transition duration-200" (click)="closeMobileMenu()">Nosotros</a>
+      <a routerLink="/contacto" routerLinkActive="bg-logo-orange text-white" class="block px-4 py-3 rounded-md text-base font-bold text-logo-dark hover:bg-logo-sand hover:text-logo-orange transition duration-200" (click)="closeMobileMenu()">Contacto</a>
+      
+      <!-- CTA button for recommendation tool in mobile menu -->
+      <div class="pt-4 px-2">
+        <a routerLink="/recomendador" (click)="closeMobileMenu()" class="w-full text-center block px-4 py-2.5 rounded-full bg-gradient-to-r from-logo-orange to-accent-orange text-white font-bold shadow-md hover:shadow-lg transition-all duration-300">
+          Recomendador IA 🚀
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

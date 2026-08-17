@@ -1,0 +1,73 @@
+<section class="relative w-full h-[75vh] md:h-[85vh] overflow-hidden bg-logo-dark">
+  <app-carousel [slidesPerView]="1" [loop]="true" [autoplay]="true" [navigation]="true" [pagination]="true"
+    class="h-full">
+
+    <!-- Slide 1: General Brand Welcome -->
+    <swiper-slide class="relative w-full h-full">
+      <!-- Background Image -->
+      <div class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('https://images.unsplash.com/photo-1507629221898-576a56b530bb?auto=format&fit=crop&w=1920&q=80');">
+      </div>
+
+      <!-- Gradient Overlay (warm dark mask) -->
+      <div class="absolute inset-0 bg-gradient-to-r from-logo-dark via-logo-dark/70 to-transparent"></div>
+
+      <!-- Content Container -->
+      <div class="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+        <div class="max-w-xl md:max-w-2xl text-left select-none text-white" data-aos="fade-right">
+          <span
+            class="inline-block px-4 py-1.5 rounded-full bg-logo-orange text-white text-xs font-black tracking-widest uppercase mb-4 shadow">
+            BIENVENIDO A SUMAQ PERÚ
+          </span>
+          <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none mb-6">
+            Descubre la magia de <br />
+            <span class="text-logo-yellow">nuestra tierra</span>
+          </h1>
+          <p class="text-base sm:text-lg text-logo-sand text-opacity-90 font-medium mb-8 leading-relaxed">
+            Explora los destinos más fascinantes del Perú con guías expertos, traslados seguros y la mejor organización.
+            Full days y paquetes diseñados para ti.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <app-button-cta text="Ver Destinos" link="/full-days" styleType="primary" size="lg"></app-button-cta>
+            <app-button-cta text="Contáctanos" link="/contacto" styleType="outline"
+              class="border-white text-white hover:bg-white hover:text-logo-dark" size="lg"></app-button-cta>
+          </div>
+        </div>
+      </div>
+    </swiper-slide>
+
+    <!-- Slide 2: Smart Recommender Promo -->
+    <swiper-slide class="relative w-full h-full">
+      <!-- Background Image -->
+      <div class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1920&q=80');">
+      </div>
+
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-logo-dark via-logo-dark/70 to-transparent"></div>
+
+      <!-- Content Container -->
+      <div class="absolute inset-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+        <div class="max-w-xl md:max-w-2xl text-left select-none text-white">
+          <span
+            class="inline-block px-4 py-1.5 rounded-full bg-logo-yellow text-logo-dark text-xs font-black tracking-widest uppercase mb-4 shadow">
+            SISTEMA RECOMENDADOR INTELIGENTE ✨
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-6">
+            ¿No sabes a dónde ir? <br />
+            <span class="text-logo-orange">Nuestra IA te ayuda</span>
+          </h2>
+          <p class="text-base sm:text-lg text-logo-sand text-opacity-90 font-medium mb-8 leading-relaxed">
+            Responde un sencillo cuestionario de 15 preguntas y nuestro recomendador inteligente analizará tu
+            presupuesto, tiempo y gustos para sugerirte el tour ideal.
+          </p>
+          <div>
+            <app-button-cta text="Probar Recomendador Inteligente" link="/recomendador" styleType="primary"
+              size="lg"></app-button-cta>
+          </div>
+        </div>
+      </div>
+    </swiper-slide>
+
+  </app-carousel>
+</section>

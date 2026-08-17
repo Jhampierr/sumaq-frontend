@@ -1,0 +1,70 @@
+<section class="py-16 bg-white border-t border-logo-sand border-opacity-30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <!-- Section Title -->
+    <app-section-title 
+      title="Estamos respaldados por" 
+      subtitle="Garantía y Confianza"
+      align="center">
+    </app-section-title>
+
+    <!-- Flexible Logos Container -->
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-10 md:gap-16 lg:gap-24" data-aos="fade-up">
+      
+      <!-- Logo 1: PromPerú -->
+      <div class="flex flex-col items-center p-6 bg-logo-cream bg-opacity-50 border border-logo-sand border-opacity-30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 w-64">
+        <!-- SVG mimicking PromPeru brand -->
+        <svg viewBox="0 0 200 60" class="w-40 h-16">
+          <rect width="200" height="60" rx="10" fill="#D32F2F" />
+          <text x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-size="20" fill="#FFFFFF">PROMPERÚ</text>
+          <text x="50%" y="75%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="8" fill="#FFCDD2" letter-spacing="2">EXPORTACIÓN Y TURISMO</text>
+        </svg>
+        <span class="text-xs font-bold text-logo-dark text-opacity-60 mt-3">Licencia Oficial de Marca País</span>
+      </div>
+
+      <!-- Logo 2: Agencia de Viajes y Turismo Registrada -->
+      <div class="flex flex-col items-center p-6 bg-logo-cream bg-opacity-50 border border-logo-sand border-opacity-30 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 w-64">
+        <svg viewBox="0 0 200 60" class="w-40 h-16">
+          <!-- Circular Stamp Shield Emblem -->
+          <circle cx="30" cy="30" r="22" fill="#E65100" />
+          <path d="M30 18 L38 24 L35 34 L25 34 L22 24 Z" fill="#FFFFFF" />
+          <!-- Texts -->
+          <text x="125" y="28" dominant-baseline="middle" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-size="14" fill="#E65100">AGENCIA</text>
+          <text x="125" y="44" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="800" font-size="10" fill="#2E2A25" letter-spacing="1">REGISTRADA</text>
+        </svg>
+        <span class="text-xs font-bold text-logo-dark text-opacity-60 mt-3">Agencia de Viajes Autorizada</span>
+      </div>
+
+      <!-- Logo 3: MINCETUR + Verifica aquí Button -->
+      <div class="flex flex-col sm:flex-row items-center p-6 bg-logo-cream bg-opacity-50 border border-logo-sand border-opacity-30 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 gap-6 w-full max-w-xl">
+        <div class="flex items-center space-x-4 shrink-0">
+          <svg viewBox="0 0 160 60" class="w-40 h-16">
+            <!-- Government red stripe ribbon representation -->
+            <rect x="0" y="0" width="10" height="60" fill="#D32F2F" />
+            <rect x="10" y="0" width="10" height="60" fill="#FFFFFF" />
+            <rect x="20" y="0" width="10" height="60" fill="#D32F2F" />
+            <!-- Text -->
+            <text x="95" y="24" dominant-baseline="middle" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-size="15" fill="#D32F2F">MINCETUR</text>
+            <text x="95" y="44" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#1E150F">MINISTERIO DE TURISMO</text>
+          </svg>
+        </div>
+        <div class="text-center sm:text-left flex-grow">
+          <h4 class="text-sm font-black text-logo-dark leading-snug">Registro Nacional del Directorio de Prestadores</h4>
+          <p class="text-xs text-logo-dark text-opacity-60 font-semibold mt-1">Verifica nuestra vigencia oficial en la base de datos del Mincetur.</p>
+        </div>
+        <div class="shrink-0 w-full sm:w-auto">
+          <!-- Button linked to official query website -->
+          <app-button-cta 
+            text="Verifica aquí" 
+            link="https://consultasenlinea.mincetur.gob.pe/directoriodeturismo/" 
+            styleType="outline" 
+            size="sm"
+            class="w-full sm:w-auto">
+          </app-button-cta>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

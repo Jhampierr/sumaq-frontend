@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+
+  body {
+    @apply bg-logo-cream text-logo-dark overflow-x-hidden;
+  }
+
+  /* Custom Warm Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-logo-sand;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-logo-orange bg-opacity-70 rounded-full border-2 border-logo-sand hover:bg-logo-gold;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white bg-opacity-75 backdrop-blur-md border border-white border-opacity-40 shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-logo-orange to-accent-orange text-white hover:from-logo-gold hover:to-logo-orange shadow-md hover:shadow-lg transition-all duration-300 font-semibold;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-logo-gold via-logo-orange to-accent-orange;
+  }
+}
+
+/* Swiper custom styling to fit warm theme */
+.swiper-pagination-bullet-active {
+  background: #FF9800 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #FF9800 !important;
+}
+
+/* AOS overrides or helper classes if needed */
+[data-aos] {
+  pointer-events: none;
+}
+
+.aos-animate [data-aos] {
+  pointer-events: auto;
+}

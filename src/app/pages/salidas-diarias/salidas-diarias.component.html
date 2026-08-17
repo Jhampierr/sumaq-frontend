@@ -1,0 +1,50 @@
+<div class="py-12 bg-logo-cream min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header Title -->
+    <app-section-title 
+      title="Salidas Diarias Garantizadas" 
+      subtitle="Viaja cualquier día de la semana sin límites"
+      align="center">
+    </app-section-title>
+
+    <!-- Information banner -->
+    <div class="mt-8 bg-gradient-to-r from-logo-orange to-accent-orange text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6" data-aos="fade-up">
+      <div class="max-w-2xl text-left select-none">
+        <h3 class="text-xl sm:text-2xl font-black">¡No esperes al fin de semana! 🎒</h3>
+        <p class="text-sm text-logo-cream text-opacity-90 mt-2 font-semibold">
+          Organizamos salidas de Lunes a Domingo con grupos mínimos reducidos. Ideal para viajeros individuales, parejas o familias que quieren disfrutar de destinos como Ica-Paracas, Canta y Lunahuaná con tarifas súper accesibles y total comodidad.
+        </p>
+      </div>
+      <div class="shrink-0 w-full lg:w-auto">
+        <a routerLink="/contacto" class="w-full lg:w-auto text-center inline-block px-8 py-3.5 rounded-full bg-white text-logo-gold font-bold shadow-md hover:bg-logo-sand transition-all duration-300">
+          Reservar Salida
+        </a>
+      </div>
+    </div>
+
+    <!-- Daily Tours Grid -->
+    <div class="mt-12" data-aos="fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let tour of dailyTours" class="h-full">
+          <app-card-tour [tour]="tour"></app-card-tour>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assistance Footer Banner -->
+    <div class="mt-16 text-center bg-white bg-opacity-40 border border-logo-sand border-opacity-30 rounded-3xl p-8" data-aos="zoom-in">
+      <h4 class="text-lg font-black text-logo-dark">¿Tienes fechas personalizadas o un grupo grande? 👥</h4>
+      <p class="text-sm text-logo-dark text-opacity-70 mt-2 font-medium">Cotizamos itinerarios privados a medida con movilidad exclusiva y guías privados.</p>
+      <div class="mt-6 flex justify-center gap-4 flex-wrap">
+        <a href="https://wa.me/51987654321" target="_blank" class="inline-flex items-center space-x-2 px-6 py-2.5 rounded-full bg-green-500 hover:bg-green-600 text-white font-bold transition-all shadow-md">
+          <!-- WhatsApp Icon -->
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.588 2.015 14.117 1.01 11.48 1.01c-5.44 0-9.866 4.372-9.87 9.802 0 1.714.47 3.388 1.365 4.85l-.393 1.434 1.485-.39 1.59.954zm10.203-7.602c-.328-.164-1.94-.957-2.24-1.066-.3-.11-.518-.164-.736.164-.218.328-.846 1.066-1.037 1.284-.19.218-.38.246-.708.082-.328-.164-1.386-.51-2.64-1.627-.977-.872-1.637-1.95-1.828-2.278-.19-.328-.02-.505.143-.668.148-.147.328-.382.492-.573.164-.19.219-.328.328-.546.11-.219.055-.41-.027-.573-.082-.164-.736-1.776-1.01-2.433-.267-.643-.56-.553-.767-.563-.198-.01-.424-.012-.653-.012-.23 0-.601.087-.915.442-.314.355-1.202 1.175-1.202 2.868s1.235 3.33 1.408 3.56c.173.23 2.43 3.712 5.887 5.202 2.886 1.246 3.466 1.077 4.697.96.932-.088 2.24-.915 2.555-1.799.314-.883.314-1.64.22-1.799-.095-.16-.356-.27-.685-.434z"/></svg>
+          <span>Chat de WhatsApp</span>
+        </a>
+        <app-button-cta text="Consultar por Formulario" link="/contacto" styleType="secondary" size="md"></app-button-cta>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<section class="py-16 bg-logo-cream">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <!-- Section Title -->
+    <app-section-title 
+      title="Los Full days más solicitados" 
+      subtitle="Excursiones de un día"
+      align="center">
+    </app-section-title>
+
+    <!-- Carousel Container -->
+    <div class="mt-8" data-aos="fade-up">
+      <app-carousel [slidesPerView]="3" [autoplay]="false" [loop]="true" [navigation]="true" [pagination]="true">
+        <swiper-slide *ngFor="let tour of fullDays" class="h-full py-4">
+          <app-card-tour [tour]="tour"></app-card-tour>
+        </swiper-slide>
+      </app-carousel>
+    </div>
+
+    <!-- View More Button -->
+    <div class="mt-10" data-aos="zoom-in">
+      <app-button-cta 
+        text="Ver más destinos" 
+        link="/full-days" 
+        styleType="primary" 
+        size="lg">
+      </app-button-cta>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,86 @@
+<div class="py-12 bg-logo-cream min-h-screen">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Title Section -->
+    <app-section-title 
+      title="Nuestros Destinos Full Days" 
+      subtitle="Escápate de la rutina en un solo día"
+      align="center">
+    </app-section-title>
+
+    <!-- Filters Bar -->
+    <div class="mt-8 bg-white bg-opacity-60 border border-logo-sand border-opacity-35 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6" data-aos="fade-up">
+      <!-- Location Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-bold text-logo-dark text-opacity-50 uppercase tracking-widest mr-2">Filtrar Región:</span>
+        <button (click)="onLocationChange('todos')" 
+                [ngClass]="selectedLocation === 'todos' ? 'bg-logo-orange text-white shadow-md' : 'bg-logo-sand text-logo-gold hover:bg-logo-yellow hover:text-logo-dark'" 
+                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300">
+          Todos
+        </button>
+        <button (click)="onLocationChange('Ica')" 
+                [ngClass]="selectedLocation === 'Ica' ? 'bg-logo-orange text-white shadow-md' : 'bg-logo-sand text-logo-gold hover:bg-logo-yellow hover:text-logo-dark'" 
+                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300">
+          Ica / Paracas
+        </button>
+        <button (click)="onLocationChange('Churín')" 
+                [ngClass]="selectedLocation === 'Churín' ? 'bg-logo-orange text-white shadow-md' : 'bg-logo-sand text-logo-gold hover:bg-logo-yellow hover:text-logo-dark'" 
+                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300">
+          Churín
+        </button>
+        <button (click)="onLocationChange('Marcahuasi')" 
+                [ngClass]="selectedLocation === 'Marcahuasi' ? 'bg-logo-orange text-white shadow-md' : 'bg-logo-sand text-logo-gold hover:bg-logo-yellow hover:text-logo-dark'" 
+                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300">
+          Marcahuasi
+        </button>
+        <button (click)="onLocationChange('Canta')" 
+                [ngClass]="selectedLocation === 'Canta' ? 'bg-logo-orange text-white shadow-md' : 'bg-logo-sand text-logo-gold hover:bg-logo-yellow hover:text-logo-dark'" 
+                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300">
+          Canta
+        </button>
+        <button (click)="onLocationChange('Lunahuaná')" 
+                [ngClass]="selectedLocation === 'Lunahuaná' ? 'bg-logo-orange text-white shadow-md' : 'bg-logo-sand text-logo-gold hover:bg-logo-yellow hover:text-logo-dark'" 
+                class="px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300">
+          Lunahuaná
+        </button>
+      </div>
+
+      <!-- Price Range Slider -->
+      <div class="flex items-center space-x-4 w-full md:w-64">
+        <div class="flex-grow">
+          <div class="flex justify-between text-xs font-bold text-logo-dark text-opacity-60 mb-1">
+            <span>Presupuesto Máx:</span>
+            <span class="text-logo-gold">S/ {{ maxPrice }}</span>
+          </div>
+          <input type="range" 
+                 min="80" 
+                 max="200" 
+                 step="10"
+                 [value]="maxPrice" 
+                 (input)="onPriceChange($event)"
+                 class="w-full h-2 bg-logo-sand rounded-lg appearance-none cursor-pointer accent-logo-orange" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Tours Grid -->
+    <div class="mt-12" data-aos="fade-up">
+      <div *ngIf="filteredTours.length > 0; else noResults" 
+           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let tour of filteredTours" class="h-full">
+          <app-card-tour [tour]="tour"></app-card-tour>
+        </div>
+      </div>
+
+      <!-- No Results Screen -->
+      <ng-template #noResults>
+        <div class="py-16 text-center select-none bg-white bg-opacity-40 rounded-3xl border border-logo-sand border-opacity-30">
+          <svg class="w-16 h-16 text-logo-orange text-opacity-50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <h3 class="text-lg font-black text-logo-dark">No se encontraron destinos</h3>
+          <p class="text-sm text-logo-dark text-opacity-65 mt-1">Intenta ajustando el filtro de presupuesto o ubicación.</p>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+</div>
