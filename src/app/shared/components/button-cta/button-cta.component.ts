@@ -26,4 +26,8 @@ export class ButtonCtaComponent {
       this.btnClick.emit();
     }
   }
+
+  get isExternalLink(): boolean {
+    return !!this.link && /^(https?:)?\/\/|^mailto:|^tel:/i.test(this.link);
+  }
 }

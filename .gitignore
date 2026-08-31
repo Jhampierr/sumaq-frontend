@@ -45,3 +45,6 @@ Thumbs.db
 
 #IA
 .claude/scheduled_tasks.lock
+
+#Mis archivos
+public/images/*
