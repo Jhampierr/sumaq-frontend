@@ -1,0 +1,50 @@
+@if (!enRecomendador()) {
+  <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
+    @if (mensajeAbierto()) {
+      <div class="asistente-burbuja relative max-w-[16rem] bg-white rounded-2xl shadow-xl border border-logo-sand p-4" role="dialog" aria-label="Sistema Recomendador Inteligente">
+        <button type="button" (click)="cerrar()" aria-label="Cerrar mensaje"
+          class="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full text-logo-dark/50 hover:text-logo-dark hover:bg-logo-cream">
+          ✕
+        </button>
+        <p class="text-[10px] font-extrabold tracking-widest uppercase text-logo-orange pr-6 leading-none">Sistema Recomendador ✨</p>
+        <p class="text-sm font-extrabold text-logo-dark mt-1.5 leading-snug">¿No sabes a dónde ir? 🧭</p>
+        <p class="text-xs text-logo-dark/70 mt-1 leading-snug">
+          Prueba nuestro <strong>Sistema Recomendador Inteligente</strong>: responde el cuestionario y te sugerimos el tour ideal.
+        </p>
+        <a routerLink="/recomendador" (click)="cerrar()" class="btn-gradient mt-3 inline-block text-center w-full text-sm py-2 rounded-full">
+          Probar el Sistema Recomendador
+        </a>
+        <span class="absolute -bottom-2 right-8 w-4 h-4 bg-white border-r border-b border-logo-sand rotate-45"></span>
+      </div>
+    }
+
+    <button type="button" (click)="alternar()" aria-label="Sistema Recomendador Inteligente de tours"
+      class="asistente-mascota relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-logo-cream border-2 border-logo-orange shadow-xl flex items-center justify-center hover:scale-105 transition-transform">
+      <span class="asistente-onda absolute inset-0 rounded-full border-2 border-logo-orange pointer-events-none" aria-hidden="true"></span>
+      <span class="asistente-onda asistente-onda-2 absolute inset-0 rounded-full border-2 border-logo-orange pointer-events-none" aria-hidden="true"></span>
+      @if (!mensajeAbierto()) {
+        <span class="absolute -top-2 -right-1 bg-logo-orange text-white text-[10px] font-black rounded-full px-2 py-0.5 shadow-md whitespace-nowrap">
+          ¡Recomendador!
+        </span>
+      }
+      <svg viewBox="0 0 100 100" class="w-12 h-12 sm:w-16 sm:h-16" aria-hidden="true">
+        <!-- Cuerpo y cuello de la llama -->
+        <path d="M30 92 L30 62 Q30 52 40 52 L58 52 Q66 52 66 60 L66 92 Z" fill="#F5E6CC" stroke="#1E150F" stroke-width="2.5" stroke-linejoin="round" />
+        <path d="M44 56 L44 30 Q44 22 52 22 Q60 22 60 30 L60 56 Z" fill="#F5E6CC" stroke="#1E150F" stroke-width="2.5" stroke-linejoin="round" />
+        <!-- Orejas -->
+        <path d="M46 24 L44 10 L51 20 Z" fill="#F5E6CC" stroke="#1E150F" stroke-width="2.5" stroke-linejoin="round" />
+        <path d="M58 24 L60 10 L53 20 Z" fill="#F5E6CC" stroke="#1E150F" stroke-width="2.5" stroke-linejoin="round" />
+        <!-- Hocico -->
+        <ellipse cx="61" cy="34" rx="7" ry="5.5" fill="#F5E6CC" stroke="#1E150F" stroke-width="2.5" />
+        <!-- Ojo y sonrisa -->
+        <circle cx="53" cy="28" r="2.3" fill="#1E150F" />
+        <path d="M59 36 Q62 38 65 35" fill="none" stroke="#1E150F" stroke-width="1.8" stroke-linecap="round" />
+        <!-- Manta andina -->
+        <path d="M32 60 L64 60 L64 74 L32 74 Z" fill="#E65100" />
+        <path d="M32 66 L64 66" stroke="#FFD54F" stroke-width="3" />
+        <!-- Patas -->
+        <path d="M38 92 L38 76 M58 92 L58 76" stroke="#1E150F" stroke-width="2.5" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+}

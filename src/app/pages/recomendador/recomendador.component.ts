@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { CommonModule, NgIf, NgClass, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RecomendadorService } from '../../core/services/recomendador.service';
@@ -51,7 +53,20 @@ export class RecomendadorComponent {
     equipaje: 'mediano'
   };
 
-  constructor(private recomendadorService: RecomendadorService) {}
+  constructor(
+    private recomendadorService: RecomendadorService,
+    private location: Location,
+    private router: Router
+  ) {}
+
+  salir() {
+    // navigationId > 1 means the user arrived from another page inside the app
+    if ((history.state?.navigationId ?? 0) > 1) {
+      this.location.back();
+    } else {
+      this.router.navigateByUrl('/inicio');
+    }
+  }
 
   nextStep() {
     if (this.currentStep < 15) {

@@ -1,0 +1,41 @@
+.asistente-mascota {
+  animation: asistente-rebote 3s ease-in-out infinite, asistente-sacudida 6s ease-in-out 3s infinite;
+}
+
+.asistente-onda {
+  animation: asistente-onda 2s ease-out infinite;
+}
+
+.asistente-onda-2 {
+  animation-delay: 1s;
+}
+
+.asistente-burbuja {
+  animation: asistente-aparecer 0.3s ease-out;
+}
+
+@keyframes asistente-rebote {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes asistente-sacudida {
+  0%, 12%, 100% { rotate: 0deg; }
+  3% { rotate: -12deg; }
+  6% { rotate: 12deg; }
+  9% { rotate: -8deg; }
+}
+
+@keyframes asistente-onda {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes asistente-aparecer {
+  from { opacity: 0; transform: translateY(8px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asistente-mascota, .asistente-burbuja, .asistente-onda { animation: none; }
+}
