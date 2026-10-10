@@ -1,60 +1,82 @@
 <div class="text-left space-y-8 select-none animate-fade-in" *ngIf="result">
-  
+
   <!-- Success Title -->
   <div class="text-center space-y-2 max-w-xl mx-auto">
     <h3 class="text-2xl sm:text-3xl font-black text-logo-dark">¡Tenemos tu destino ideal! 🎉</h3>
     <p class="text-xs sm:text-sm text-logo-dark text-opacity-60 font-semibold">
-      Nuestro modelo inteligente ha analizado tus 15 respuestas de viaje y ha calculado la recomendación perfecta.
+      Nuestro modelo inteligente analizó tus respuestas y seleccionó los {{ recomendaciones.length }} destinos que mejor coinciden contigo.
     </p>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-    
-    <!-- Left Column: Match Details -->
-    <div class="lg:col-span-7 space-y-6">
-      
-      <!-- Match Score Card -->
-      <div class="bg-gradient-to-r from-logo-orange to-accent-orange text-white p-6 rounded-3xl shadow-lg flex items-center space-x-6">
-        <div class="w-20 h-20 rounded-full bg-white bg-opacity-20 flex items-center justify-center border-4 border-white border-opacity-35 shrink-0">
-          <span class="text-2xl sm:text-3xl font-black">{{ result.matchScore }}%</span>
-        </div>
-        <div class="flex-grow text-left">
-          <span class="text-xs font-bold text-logo-cream text-opacity-80 tracking-widest uppercase">Grado de Coincidencia</span>
-          <h4 class="text-lg font-black mt-1">¡Compatibilidad Alta!</h4>
-          <p class="text-xs text-logo-cream text-opacity-90 font-medium">Este destino cumple con la gran mayoría de tus condiciones indicadas.</p>
-        </div>
+  <!-- Top-3 en el orden del modelo -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div *ngFor="let rec of recomendaciones"
+         class="group flex flex-col h-full bg-white bg-opacity-70 backdrop-blur-md border rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+         [ngClass]="rec.rank === 1 ? 'border-logo-orange' : 'border-logo-sand border-opacity-40'">
+
+      <div class="relative overflow-hidden aspect-[4/3] w-full">
+        <img [src]="imagen(rec.region)" [alt]="rec.destino" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+
+        <span class="absolute top-4 left-4 px-3 py-1 text-xs font-black bg-white bg-opacity-95 text-logo-gold shadow-sm rounded-full tracking-wide">
+          Opción {{ rec.rank }}
+        </span>
+
+        <span class="absolute bottom-4 left-4 px-3 py-1 text-xs font-bold bg-logo-dark bg-opacity-80 text-white rounded-full flex items-center space-x-1">
+          <svg class="w-3.5 h-3.5 text-logo-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>{{ rec.region }}</span>
+        </span>
       </div>
 
-      <!-- Recommendation Reason -->
-      <div class="bg-white bg-opacity-70 border border-logo-sand border-opacity-35 p-6 rounded-3xl space-y-3">
-        <h4 class="text-md font-black text-logo-dark">¿Por qué te recomendamos este destino?</h4>
-        <p class="text-sm text-logo-dark text-opacity-80 leading-relaxed font-semibold">
-          {{ result.reasoning }}
+      <div class="p-5 flex flex-col flex-grow">
+        <h4 class="text-lg font-black text-logo-dark leading-snug group-hover:text-logo-orange transition-colors duration-300 mb-1">
+          {{ rec.destino }}
+        </h4>
+        <p class="text-xs text-logo-dark text-opacity-60 font-semibold mb-4">
+          {{ rec.distancia_km }} km · {{ rec.tiempo_horas }} h desde Lima
         </p>
-      </div>
 
-      <!-- Action buttons -->
-      <div class="flex flex-wrap gap-4 pt-2">
-        <button (click)="onReset()" class="px-6 py-2.5 rounded-full bg-logo-sand text-logo-gold font-bold hover:bg-logo-yellow hover:text-logo-dark transition-all duration-300">
-          &larr; Volver a realizar Test
-        </button>
-        <app-button-cta text="Consultar por WhatsApp" [link]="recommendedTour ? 'https://wa.me/51987654321?text=Hola!%20El%20recomendador%20de%20Sumaq%20Peru%20me%20recomendo%20el%20destino%20' + recommendedTour.name : '/contacto'" styleType="primary"></app-button-cta>
-      </div>
-
-    </div>
-
-    <!-- Right Column: Recommended Tour Card -->
-    <div class="lg:col-span-5 w-full max-w-sm mx-auto">
-      <div *ngIf="recommendedTour; else loadingTour">
-        <app-card-tour [tour]="recommendedTour"></app-card-tour>
-      </div>
-      <ng-template #loadingTour>
-        <div class="p-12 text-center bg-white rounded-3xl border border-logo-sand">
-          <span class="text-sm font-bold text-logo-dark text-opacity-50">Cargando detalles del destino...</span>
+        <div class="mt-auto pt-4 border-t border-logo-sand border-opacity-30 flex items-center justify-between">
+          <div class="flex flex-col">
+            <span class="text-[10px] font-bold text-logo-dark text-opacity-50 uppercase tracking-widest leading-none">Precio desde</span>
+            <span class="text-lg font-extrabold text-logo-gold leading-none mt-1">S/ {{ rec.precio_base }}</span>
+          </div>
+          <div class="flex flex-col items-end">
+            <span class="text-[10px] font-bold text-logo-dark text-opacity-50 uppercase tracking-widest leading-none">Puntaje</span>
+            <span class="text-lg font-extrabold text-logo-orange leading-none mt-1">{{ rec.score | number:'1.2-2' }}</span>
+          </div>
         </div>
-      </ng-template>
+      </div>
     </div>
+  </div>
 
+  <!-- Recommendation Reason -->
+  <div class="bg-white bg-opacity-70 border border-logo-sand border-opacity-35 p-6 rounded-3xl space-y-4">
+    <div class="space-y-1">
+      <h4 class="text-md font-black text-logo-dark">¿Por qué te recomendamos {{ principal.destino }}?</h4>
+      <p class="text-xs text-logo-dark text-opacity-60 font-semibold">
+        Valoración de cada criterio del modelo frente a los demás destinos (100% = el mejor en ese criterio).
+      </p>
+    </div>
+    <div class="space-y-3">
+      <div *ngFor="let comp of etiquetasComponentes" class="space-y-1">
+        <div class="flex justify-between text-xs font-bold text-logo-dark">
+          <span>{{ comp.etiqueta }}</span>
+          <span class="text-logo-gold">{{ principal.componentes[comp.clave] * 100 | number:'1.0-0' }}%</span>
+        </div>
+        <div class="w-full bg-logo-sand h-2 rounded-full overflow-hidden">
+          <div class="bg-gradient-to-r from-logo-yellow to-logo-orange h-full rounded-full"
+               [style.width.%]="principal.componentes[comp.clave] * 100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="flex flex-wrap gap-4 pt-2">
+    <button (click)="onReset()" class="px-6 py-2.5 rounded-full bg-logo-sand text-logo-gold font-bold hover:bg-logo-yellow hover:text-logo-dark transition-all duration-300">
+      &larr; Volver a realizar Test
+    </button>
+    <app-button-cta text="Consultar por WhatsApp" [link]="'https://wa.me/51987654321?text=Hola!%20El%20recomendador%20de%20Sumaq%20Peru%20me%20recomendo%20el%20destino%20' + principal.destino" styleType="primary"></app-button-cta>
   </div>
 
 </div>
