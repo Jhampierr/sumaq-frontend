@@ -3,11 +3,15 @@ import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { Recomendacion, RecomendacionResponse } from '../../../../core/models/recomendacion.model';
 import { ButtonCtaComponent } from '../../../../shared/components/button-cta/button-cta.component';
 
-// Imagen genérica por región hasta contar con fotos de cada destino
-const IMAGEN_POR_REGION: Record<string, string> = {
-  Costa: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80',
-  Sierra: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80'
+// Foto por destino_id (D004 Dromedarius, D009 Mapi Limeño, D011 Churín, D012 Chancay)
+// mientras no haya BD; los destinos sin carpeta muestran el logo de Sumaq
+const IMAGEN_POR_DESTINO: Record<string, string> = {
+  D012: '/images/CHANCAY/castillo1_medio.webp',
+  D011: '/images/CHURIN/churin_medio.webp',
+  D009: '/images/MAPI/machu-picchu-limeño1.webp',
+  D004: '/images/DROMEDARIUS/dromedarius1_cerca.webp'
 };
+const LOGO_SUMAQ = '/images/LOGO_SUMAQ.webp';
 
 // Nombres de los componentes del modelo (COMPONENTS del notebook)
 const ETIQUETAS_COMPONENTES: { clave: string; etiqueta: string }[] = [
@@ -41,8 +45,12 @@ export class ResultadoRecomendacionComponent {
     return this.result.recomendaciones[0];
   }
 
-  imagen(region: string): string {
-    return IMAGEN_POR_REGION[region] ?? IMAGEN_POR_REGION['Costa'];
+  imagen(destinoId: string): string {
+    return IMAGEN_POR_DESTINO[destinoId] ?? LOGO_SUMAQ;
+  }
+
+  esLogo(destinoId: string): boolean {
+    return !(destinoId in IMAGEN_POR_DESTINO);
   }
 
   onReset() {

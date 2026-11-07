@@ -2,7 +2,7 @@
 
   <!-- Success Title -->
   <div class="text-center space-y-2 max-w-xl mx-auto">
-    <h3 class="text-2xl sm:text-3xl font-black text-logo-dark">¡Tenemos tu destino ideal! 🎉</h3>
+    <h3 class="text-2xl sm:text-3xl font-black text-logo-dark">¡Tenemos tu destino ideal!</h3>
     <p class="text-xs sm:text-sm text-logo-dark text-opacity-60 font-semibold">
       Nuestro modelo inteligente analizó tus respuestas y seleccionó los {{ recomendaciones.length }} destinos que mejor coinciden contigo.
     </p>
@@ -14,8 +14,9 @@
          class="group flex flex-col h-full bg-white bg-opacity-70 backdrop-blur-md border rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
          [ngClass]="rec.rank === 1 ? 'border-logo-orange' : 'border-logo-sand border-opacity-40'">
 
-      <div class="relative overflow-hidden aspect-[4/3] w-full">
-        <img [src]="imagen(rec.region)" [alt]="rec.destino" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="relative overflow-hidden aspect-[4/3] w-full" [ngClass]="{ 'bg-logo-sand': esLogo(rec.destino_id) }">
+        <img [src]="imagen(rec.destino_id)" [alt]="rec.destino" class="w-full h-full group-hover:scale-110 transition-transform duration-500"
+             [ngClass]="esLogo(rec.destino_id) ? 'object-contain p-6' : 'object-cover'" />
 
         <span class="absolute top-4 left-4 px-3 py-1 text-xs font-black bg-white bg-opacity-95 text-logo-gold shadow-sm rounded-full tracking-wide">
           Opción {{ rec.rank }}
